@@ -1,5 +1,9 @@
 version: 0.2
 
+env:
+  variables:
+    REGION: "ap-southeast-1"  # Default region (you can change this value)
+
 phases:
   install:
     runtime-versions:
@@ -10,7 +14,6 @@ phases:
       - pip install -r requirements.txt
       - echo "Logging in to Amazon ECR..."
       - ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
-      - REGION=$(aws configure get region)
       - aws ecr get-login-password --region "$REGION" | docker login --username AWS --password-stdin "$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com"
   build:
     commands:
