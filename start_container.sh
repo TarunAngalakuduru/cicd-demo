@@ -1,8 +1,14 @@
 #!/bin/bash
 set -e
 
-# Switch to root user
-sudo su - root
+# Switch to root user (if not already root)
+if [ "$(whoami)" != "root" ]; then
+  sudo su - root
+fi
+
+# Set required permissions for all files in the current working directory and subdirectories
+chmod -R 755 /opt/codedeploy-agent/deployment-root/*/deployment-archive
+chown -R root:root /opt/codedeploy-agent/deployment-root/*/deployment-archive
 
 # Define AWS Region and ECR Repository details
 REGION="ap-southeast-1"  # Change this as needed
