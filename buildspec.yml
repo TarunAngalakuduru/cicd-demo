@@ -19,7 +19,7 @@ phases:
     commands:
       - echo "Running tests..."
       - echo "Building Docker image..."
-      - IMAGE_URI="$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/my-ecr:$CODEBUILD_BUILD_NUMBER"
+      - IMAGE_URI="$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/my-ecr:latest"
       - docker build -t "$IMAGE_URI" .
       - docker push "$IMAGE_URI"
   post_build:
